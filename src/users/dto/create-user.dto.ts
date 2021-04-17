@@ -1,10 +1,6 @@
-import { Gender } from '../enums/gender.enum';
-import {
-  IsDateString,
-  IsEmail,
-  IsEnum,
-  Length,
-} from 'class-validator';
+import { Gender } from "../enums/gender.enum";
+import { IsDate, IsEmail, IsEnum, Length } from "class-validator";
+import { Type } from "class-transformer";
 
 export class CreateUserDto {
   @Length(3)
@@ -16,7 +12,8 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @IsDateString({}, { message: 'Invalid date' })
+  @IsDate()
+  @Type(() => Date)
   dob: Date;
 
   @IsEnum(Gender, { message: `Gender must be male or female or other` })

@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 @Unique(['email'])
@@ -30,13 +31,14 @@ export class User {
   @CreateDateColumn()
   dob: Date;
 
-  @Column({ enum: Gender })
-  gender: Gender;
+  @Column({ enum: Gender, nullable: false })
+  gender: string;
 
-  @Column({ enum: Role, default: Role.USER })
-  role: Role;
+  @Column({ enum: Role, nullable: false, default: Role.USER })
+  role: string;
 
   @Column({ nullable: false })
+  @Exclude()
   password: string;
 
   @CreateDateColumn({ nullable: false })

@@ -7,6 +7,8 @@ import { typeormConfig } from './utils/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
+import { CartsModule } from './carts/carts.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { ProductsModule } from './products/products.module';
     UsersModule,
     AuthModule,
     ProductsModule,
+    CartsModule,
+    AssetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

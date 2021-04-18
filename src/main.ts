@@ -2,7 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path'
+import { join } from 'path';
+import * as helmet from 'helmet';
+import * as csurf from 'csurf';
+import * as compression from 'compression';
 
 declare const module: any;
 
@@ -13,7 +16,6 @@ async function bootstrap() {
 
   app.enableCors();
   app.setGlobalPrefix('api');
-  console.log(__dirname);
   app.useStaticAssets(join(__dirname, '..', 'public'));
   // app.useStaticAssets(join(__dirname, '..', 'public'));
   app.useGlobalPipes(
@@ -21,6 +23,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.use(csurf());
+  app.use(helmet());
+  app.use(compression());
 
   await app.listen(port);
 

@@ -5,6 +5,7 @@ export class Product {
   description: string;
   price: number;
   noInStock: number;
+  productImage: string;
 
   createdAt: string;
   updatedAt: string;

@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # dotenv
 .env
+
+# public asset folder
+/public

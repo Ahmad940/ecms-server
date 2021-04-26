@@ -1,9 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Asset {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @ManyToOne((type) => User, (user) => user.id, {
+    cascade: true,
+  })
+  author: User;
 
   @Column({ nullable: false })
   fieldname: string;
@@ -28,4 +40,7 @@ export class Asset {
 
   @Column({ type: 'int', nullable: false })
   size: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

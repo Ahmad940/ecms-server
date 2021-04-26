@@ -1,18 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseInterceptors,
-  UploadedFile,
-} from '@nestjs/common';
+  Get,
+  Param,
+  Patch,
+  Post, Request,
+  UploadedFile, UseGuards,
+  UseInterceptors
+} from "@nestjs/common";
 import { AssetsService } from './assets.service';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from '../utils/file-upload';
+import { Asset } from './entities/asset.entity';
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 @Controller('assets')
 export class AssetsController {
@@ -23,6 +25,7 @@ export class AssetsController {
     return this.assetsService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('image')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -30,14 +33,18 @@ export class AssetsController {
       fileFilter: fileFilter,
     }),
   )
-  uploadImage(@UploadedFile() image) {
+  uploadImage(@UploadedFile() image, @Request() req) {
+    image.author = req.user;
     console.log('File', image);
-    return this.assetsService.create(image);
+    return image;
+    // return this.assetsService.create(image);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.assetsService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const asset = await this.assetsService.findOne(id);
+    delete asset.author.password;
+    return asset;
   }
 
   @Patch(':id')
@@ -46,7 +53,7 @@ export class AssetsController {
   }
 
   @Delete('/:id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.assetsService.remove(id);
   }
 }

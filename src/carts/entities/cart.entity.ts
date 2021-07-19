@@ -20,10 +20,10 @@ export class Cart {
   @ManyToOne(() => User, (user: User) => user.id, {
     eager: true,
   })
-  author: User;
+  author: string;
 
   @ManyToOne(() => Product, (product: Product) => product.id, { eager: true })
-  product: Product;
+  product: string;
 
   @Column('int', { nullable: false })
   quantity: number;

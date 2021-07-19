@@ -15,7 +15,7 @@ export class ProductsController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   create(@Body() createProductDto: CreateProductDto, @Request() req) {
-    createProductDto.author = req.user;
+    createProductDto.author = req.user.id;
     return this.productsService.create(createProductDto);
   }
 

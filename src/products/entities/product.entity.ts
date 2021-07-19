@@ -17,7 +17,7 @@ export class Product {
   id: string;
 
   @ManyToOne((type) => User, (user) => user.id)
-  author: User;
+  author: string;
 
   @Column({ nullable: false })
   name: string;

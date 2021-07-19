@@ -5,16 +5,17 @@ import {
   Get,
   Param,
   Patch,
-  Post, Request,
-  UploadedFile, UseGuards,
-  UseInterceptors
-} from "@nestjs/common";
+  Post,
+  Request,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AssetsService } from './assets.service';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from '../utils/file-upload';
-import { Asset } from './entities/asset.entity';
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('assets')
 export class AssetsController {

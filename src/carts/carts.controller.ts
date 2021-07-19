@@ -21,7 +21,7 @@ export class CartsController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createCartDto: CreateCartDto, @Request() req) {
-    createCartDto.author = req.user;
+    createCartDto.author = req.user.id;
     return this.cartsService.create(createCartDto);
   }
 

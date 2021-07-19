@@ -3,7 +3,7 @@ import { Role } from '../enums/role.enum';
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn,
+  CreateDateColumn, DeleteDateColumn,
   Entity,
   Index,
   PrimaryGeneratedColumn,
@@ -37,6 +37,12 @@ export class User {
   @Column({ enum: Role, nullable: false, default: Role.USER })
   role: string;
 
+  @Column({ nullable: false, default: false })
+  isBanned: boolean;
+
+  @Column({ nullable: false, default: false })
+  isSuspended: boolean;
+
   @Column({ nullable: false })
   @Exclude()
   password: string;
@@ -46,6 +52,9 @@ export class User {
 
   @CreateDateColumn({ nullable: false })
   updatedAt: Date;
+
+  @DeleteDateColumn({})
+  deletedAt: Date;
 
   @BeforeInsert() beforeInsert = () => {
     this.email = this.email.toLowerCase();

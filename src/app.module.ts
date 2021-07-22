@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { CartsModule } from './carts/carts.module';
 import { AssetsModule } from './assets/assets.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AssetsModule } from './assets/assets.module';
     ProductsModule,
     CartsModule,
     AssetsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

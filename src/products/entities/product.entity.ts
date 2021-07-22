@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Category } from '../../categories/entities/category.entity';
 
 @Entity()
 @Index(['id', 'name'])
@@ -18,6 +19,9 @@ export class Product {
 
   @ManyToOne((type) => User, (user) => user.id)
   author: string;
+
+  @ManyToOne((type) => Category, (category) => category.id, { eager: true })
+  category: string;
 
   @Column({ nullable: false })
   name: string;

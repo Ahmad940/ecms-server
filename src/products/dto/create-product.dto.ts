@@ -24,5 +24,11 @@ export class CreateProductDto {
   @IsNotEmpty()
   productImage: string;
 
+  @ApiProperty({
+    description: 'category id',
+  })
+  @IsNotEmpty()
+  category: string;
+
   author: string;
 }

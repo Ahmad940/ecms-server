@@ -37,8 +37,8 @@ export class AssetsController {
   uploadImage(@UploadedFile() image, @Request() req) {
     image.author = req.user;
     console.log('File', image);
-    return image;
-    // return this.assetsService.create(image);
+    // return image;
+    return this.assetsService.create(image);
   }
 
   @Get(':id')

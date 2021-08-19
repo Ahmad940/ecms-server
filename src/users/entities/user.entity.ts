@@ -3,7 +3,8 @@ import { Role } from '../enums/role.enum';
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn, DeleteDateColumn,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   Index,
   PrimaryGeneratedColumn,

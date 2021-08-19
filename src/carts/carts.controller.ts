@@ -42,7 +42,15 @@ export class CartsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':id')
+  @Delete('/check')
+  removeUserCart(@Request() req) {
+    const user = req.user.id;
+    console.log('User id', user);
+    return this.cartsService.removeUserCartItem(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/delete/:id')
   remove(@Param('id') id: string) {
     return this.cartsService.remove(id);
   }

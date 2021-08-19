@@ -39,14 +39,4 @@ lerna-debug.log*
 
 # public asset folder
 /public/
-
-
-
-
-
-
-
-
-
-
-
+.VSCodeCounter

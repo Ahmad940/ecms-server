@@ -40,4 +40,10 @@ export class CartsService {
   remove(id: string) {
     return this.cartRepository.softDelete(id);
   }
+
+  async removeUserCartItem(id: string) {
+    return await this.cartRepository.softDelete({
+      author: id,
+    });
+  }
 }
